@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:x_pro_delivery_app/core/common/app/features/end_trip_checklist/domain/entity/end_checklist_entity.dart';
-import 'package:x_pro_delivery_app/core/common/widgets/list_tiles.dart';
 
-class EndTripChecklistTile extends StatelessWidget {
+class EndTripChecklistTile extends StatefulWidget {
   final EndChecklistEntity checklist;
   final Function(bool?) onChanged;
   final bool isChecked;
@@ -15,42 +14,60 @@ class EndTripChecklistTile extends StatelessWidget {
   });
 
   @override
+  State<EndTripChecklistTile> createState() => _EndTripChecklistTileState();
+}
+
+class _EndTripChecklistTileState extends State<EndTripChecklistTile> {
+  @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-      child: CommonListTiles(
-        title: checklist.objectName ?? '',
-        leading: Icon(
-          Icons.checklist_rounded,
-          color: Theme.of(context).colorScheme.primary,
-        ),
-        trailing: Transform.scale(
-          scale: 1.1,
-          child: Checkbox(
-            value: isChecked,
-            onChanged: onChanged,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        child: ExpansionTile(
+          tilePadding: const EdgeInsets.all(16),
+          leading: Checkbox(
+            value: widget.isChecked,
+            onChanged: (value) {
+              widget.onChanged(value);
+            },
             activeColor: Theme.of(context).colorScheme.primary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
           ),
+          title: Text(
+            widget.checklist.objectName ?? 'No Name',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  decoration:
+                      widget.isChecked ? TextDecoration.lineThrough : null,
+                  color: widget.isChecked
+                      ? Theme.of(context)
+                          .colorScheme
+                          .onSurface
+                          .withOpacity(0.5)
+                      : Theme.of(context).colorScheme.onSurface,
+                ),
+          ),
+
+          // Expandable description
+          children: [
+            if (widget.checklist.description != null &&
+                widget.checklist.description!.isNotEmpty)
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 20, right: 16, bottom: 16),
+                child: Text(
+                  widget.checklist.description!,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
+                ),
+              ),
+          ],
         ),
-        titleStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
-          decoration: isChecked ? TextDecoration.lineThrough : null,
-          color:
-              isChecked
-                  ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
-                  : Theme.of(context).colorScheme.onSurface,
-          fontWeight: FontWeight.w600,
-        ),
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        elevation: 1,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 8,
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       ),
     );
   }

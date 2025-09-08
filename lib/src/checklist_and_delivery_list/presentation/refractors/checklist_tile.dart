@@ -39,20 +39,19 @@ class _ChecklistTileState extends State<ChecklistTile> {
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
 
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, bottom: 20),
-                  child: Text(
-                    widget.checklist.description ?? 'No Description',
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
+           children: [
+            if (widget.checklist.description != null &&
+                widget.checklist.description!.isNotEmpty)
+              Padding(
+                padding:
+                    const EdgeInsets.only(left: 20, right: 16, bottom: 16),
+                child: Text(
+                  widget.checklist.description!,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                      ),
                 ),
-              ],
-            ),
+              ),
           ],
         ),
       ),

@@ -284,7 +284,7 @@ import '../common/app/features/user_performance/domain/usecases/load_user_perfor
 import '../common/app/features/user_performance/presentation/bloc/user_performance_bloc.dart';
 
 final sl = GetIt.instance;
-final pb = PocketBase('https://delivery-app.pockethost.io/');
+final pb = PocketBase('https://delivery-app.winganmarketing.com');
 
 Future<void> init() async {
   final objectBoxStore = await ObjectBoxStore.create();

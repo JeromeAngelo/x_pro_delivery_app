@@ -126,7 +126,7 @@ class _DefaultDrawerState extends State<DefaultDrawer> {
               children: [
                 Text('Server Address'),
                 Text(
-                  'https://delivery-app.pockethost.io/v1/',
+                  'https://delivery-app.winganmarketing.com',
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
               ],

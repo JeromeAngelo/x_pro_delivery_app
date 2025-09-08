@@ -110,7 +110,7 @@ class _AuthScreenViewState extends State<AuthScreenView> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text('https://delivery-app.pockethost.io/v1/',
+                        Text('https://delivery-app.winganmarketing.com',
                             style: Theme.of(context).textTheme.bodySmall),
                         const SizedBox(
                           height: 20,
