@@ -409,6 +409,20 @@ Future<void> updateQueueRemarks(
             },
           );
 
+
+    // 🔔 Create notification entry
+    await _pocketBaseClient.collection('notifications').create(
+      body: {
+        'status': statusId,
+        'delivery': customerId,
+        'type': 'deliveryUpdate',
+        'created': currentTime,
+        'isRead': false,
+      },
+    );
+
+    debugPrint('🔔 Notification created for status update');
+
       debugPrint('✅ Successfully updated customer status');
     } catch (e) {
       debugPrint('❌ Operation failed: ${e.toString()}');

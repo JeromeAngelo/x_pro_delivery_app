@@ -123,6 +123,16 @@ Future<void> createTripUpdate({
       },
     );
 
+      // 🔔 Create notification entry
+    await _pocketBaseClient.collection('notifications').create(
+      body: {
+        'trip': tripId,
+        'type': 'tripUpdate',
+        'created': formattedDate,
+        'isRead': false,
+      },
+    );
+
     debugPrint('✅ Updated trip with new update record');
   } catch (e) {
     debugPrint('❌ Failed to create trip update: $e');
