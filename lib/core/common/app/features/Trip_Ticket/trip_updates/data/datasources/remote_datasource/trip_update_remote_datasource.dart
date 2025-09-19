@@ -130,6 +130,7 @@ Future<void> createTripUpdate({
         'type': 'tripUpdate',
         'created': formattedDate,
         'isRead': false,
+        'tripUpdate': tripUpdateRecord.id,
       },
     );
 
